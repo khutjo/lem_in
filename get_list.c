@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 15:24:07 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/21 16:51:35 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/22 18:00:30 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,42 @@ t_ant	*make_line(void)
 			run->next = make(line);
 			run = run->next;
 		}
-		if (comp < ft_atoi(line))
-			comp = ft_atoi(line);
-		run->max = comp;
+		if (!ft_strchr(line, '-') && !ft_strchr(line, '#') &&\
+			   	ft_strchr(line, ' '))
+			comp++;
 	}
+	head->max = comp;
 	return (head);
 }
 
-t_map		*make_map_node(t_ant *lines)
+static	void	set_names(t_map *head, t_ant *lines)
+{
+	int		i;
+	char	*temp;
+
+	temp = NULL;
+	i = ft_atoi(lines->line);
+	while (lines && head)
+	{
+		if (ft_strstr(lines->line, "##start"))
+		{
+			head->start = 1;
+			head->ants = i;
+		}
+		if (ft_strstr(lines->line, "##end"))
+			head->end = 1;
+		if (ft_strchr(lines->line, ' ') && !ft_strchr(lines->line, '#'))
+		{
+			head->name = ft_strdup(lines->line);
+			temp = ft_strchr(head->name, ' ');
+			temp[0] = '\0';
+			head = head->next;
+		}
+		lines = lines->next;
+	}
+}
+
+t_map	*make_map_node(t_ant *lines)
 {
 	int		i;
 	t_map	*run;
@@ -57,13 +85,14 @@ t_map		*make_map_node(t_ant *lines)
 
 	run = NULL;
 	head = NULL;
-	while (lines->next)
-		lines = lines->next;
 	i = lines->max;
 	while (--i >= 0)
 	{
 		temp = (t_map *)malloc(sizeof(t_map));
 		temp->name = ft_itoa(i);
+		temp->ants = 0;
+		temp->start = 0;
+		temp->end = 0;
 		temp->next = NULL;
 		if (!head)
 			run = (head = temp);
@@ -73,7 +102,6 @@ t_map		*make_map_node(t_ant *lines)
 			run = temp;
 		}
 	}
+	set_names(head, lines);
 	return (head);
 }
-
-
