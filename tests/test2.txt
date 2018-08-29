@@ -1,0 +1,8 @@
+hL1-2hhh
+hL1-3hL2-2hh
+hL1-4hL2-3hL3-2h
+hL1-5hL2-4hL3-3hL4-2
+hL1-6hL2-5hL3-4hL4-3
+hhL2-6hL3-5hL4-4
+hhhL3-6hL4-5
+hhhhL4-6

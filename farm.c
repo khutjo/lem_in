@@ -6,36 +6,57 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 08:34:28 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/22 18:01:25 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/29 16:34:39 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "insect_lib.h"
 #include <stdio.h>
 
-int  main(void)
+void	is_there_an_end(t_map *head)
 {
-	int		i;
+	int i;
+
+	i = -1;
+	while (head && !head->start)
+		head = head->next;
+	while (head->moves[++i])
+		if (head->moves[i]->exit)
+			return ;
+	no();
+}
+
+void	map_comp(t_ant *line)
+{
+	while (line)
+	{
+		ft_putendl(line->line);
+		line = line->next;
+	}
+	ft_putchar('\n');
+}
+
+int		main(void)
+{
 	t_ant	*temp_ant;
 	t_map	*head;
-	t_map	*temp_map;
+	t_ants	*queen;
+	t_map	*free_map;
 
 	head = NULL;
 	temp_ant = make_line();
+	is_it_cool(temp_ant);
 	head = make_map_node(temp_ant);
+	free_map = head;
 	map(head, temp_ant);
-	while (head)
-	{
-	i = 0;
-		while (head->tree[i])
-		{
-			temp_map = head->tree[i++];
-			printf("%s <> %s \n", head->name, temp_map->name);
-		}
-		printf("start = %d <==> end = %d <==> ant =  %d\n", head->start,\
-				head->end, head->ants);
-		head = head->next;
-		printf("\n");
-	}
+	lay_ant_eggs(head, &queen);
+	find_end(head);
+	is_there_an_end(head);
+	best_route(head);
+	map_comp(temp_ant);
+	ants_roll_out(queen, head);
+	free_lines(&temp_ant);
+	free_joogle_maps(&free_map);
+	set_the_queen_free(&queen);
 	return (0);
 }

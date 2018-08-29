@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:55:49 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/22 17:59:08 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/29 16:37:56 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,14 @@ static	void	find_link(t_map *head, t_map *set_link, t_ant *lines)
 
 	i = 0;
 	links_num = num_of_links(lines, set_link->name);
-	set_link->tree = (t_map **)malloc(sizeof(t_map **) * (1 + links_num));
+	set_link->tree = (t_map **)malloc(sizeof(t_map *) * (1 + links_num));
 	set_link->tree[links_num] = NULL;
 	while (!ft_strchr(lines->line, '-'))
 		lines = lines->next;
 	while (lines)
 	{
 		if (ft_strstr(lines->line, set_link->name))
-		{
 			set_link->tree[i++] = put_link(set_link, head, lines->line);
-		}
 		lines = lines->next;
 	}
 }
@@ -76,5 +74,28 @@ void			map(t_map *head, t_ant *lines)
 	{
 		find_link(head, list_runner, lines);
 		list_runner = list_runner->next;
+	}
+}
+
+void			lay_ant_eggs(t_map *head, t_ants **queen_ant)
+{
+	int		i;
+	t_ants	*run;
+	t_ants	*temp;
+
+	i = -1;
+	(*queen_ant) = NULL;
+	while (head && !head->start)
+		head = head->next;
+	while (++i < head->ants)
+	{
+		temp = (t_ants *)malloc(sizeof(t_ants));
+		if (!(*queen_ant))
+			(*queen_ant) = temp;
+		else
+			run->next = temp;
+		run = temp;
+		temp->name = 1 + i;
+		temp->home = head;
 	}
 }

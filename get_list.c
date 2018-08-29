@@ -6,23 +6,25 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 15:24:07 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/22 18:00:30 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/29 17:06:28 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "insect_lib.h"
 
-static	t_ant	*make(char *line)
+static	t_ant	*make(char *line, t_ant **head)
 {
 	t_ant *return_node;
 
 	return_node = (t_ant *)malloc(sizeof(t_ant));
 	return_node->line = line;
 	return_node->next = NULL;
+	if (!(*head))
+		(*head) = return_node;
 	return (return_node);
 }
 
-t_ant	*make_line(void)
+t_ant			*make_line(void)
 {
 	int		comp;
 	char	*line;
@@ -35,14 +37,14 @@ t_ant	*make_line(void)
 	while (get_next_line(&line) == 1)
 	{
 		if (!head)
-			run = (head = make(line));
+			run = make(line, &head);
 		else
 		{
-			run->next = make(line);
+			run->next = make(line, &head);
 			run = run->next;
 		}
-		if (!ft_strchr(line, '-') && !ft_strchr(line, '#') &&\
-			   	ft_strchr(line, ' '))
+		if (!ft_strchr(line, '-') && !ft_strchr(line, '#') &&
+				ft_strchr(line, ' '))
 			comp++;
 	}
 	head->max = comp;
@@ -76,7 +78,7 @@ static	void	set_names(t_map *head, t_ant *lines)
 	}
 }
 
-t_map	*make_map_node(t_ant *lines)
+t_map			*make_map_node(t_ant *lines)
 {
 	int		i;
 	t_map	*run;
@@ -89,18 +91,14 @@ t_map	*make_map_node(t_ant *lines)
 	while (--i >= 0)
 	{
 		temp = (t_map *)malloc(sizeof(t_map));
-		temp->name = ft_itoa(i);
-		temp->ants = 0;
 		temp->start = 0;
 		temp->end = 0;
 		temp->next = NULL;
 		if (!head)
-			run = (head = temp);
+			head = temp;
 		else
-		{
 			run->next = temp;
-			run = temp;
-		}
+		run = temp;
 	}
 	set_names(head, lines);
 	return (head);
