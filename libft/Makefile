@@ -6,7 +6,7 @@
 #    By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/30 13:45:26 by kmaputla          #+#    #+#              #
-#    Updated: 2018/07/30 12:15:38 by kmaputla         ###   ########.fr        #
+#    Updated: 2018/09/07 10:17:12 by kmaputla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,18 +145,19 @@ SRC =	ft_atoi.c\
 all:$(NAME)
 
 $(NAME):$(OBJ)
-	ar -rc $(NAME) $(OBJ)
+	@ar -rc $(NAME) $(OBJ)
 
 $(OBJ):$(SRC)
-	gcc -c -Wall -Werror -Wextra -g3 $(SRC)
+	@echo "making!"
+	@gcc -c -Wall -Werror -Wextra -g3 $(SRC)
 
 .PHONY : fclean  clean f re norm
 
 fclean:clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 f:all clean
 

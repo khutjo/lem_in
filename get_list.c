@@ -6,18 +6,18 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 15:24:07 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/29 17:06:28 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/09/07 16:08:23 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "insect_lib.h"
 
-static	t_ant	*make(char *line, t_ant **head)
+static	t_ant	*make(char **line, t_ant **head)
 {
 	t_ant *return_node;
 
 	return_node = (t_ant *)malloc(sizeof(t_ant));
-	return_node->line = line;
+	return_node->line = (*line);
 	return_node->next = NULL;
 	if (!(*head))
 		(*head) = return_node;
@@ -37,17 +37,19 @@ t_ant			*make_line(void)
 	while (get_next_line(&line) == 1)
 	{
 		if (!head)
-			run = make(line, &head);
+			run = make(&line, &head);
 		else
 		{
-			run->next = make(line, &head);
+			run->next = make(&line, &head);
 			run = run->next;
 		}
 		if (!ft_strchr(line, '-') && !ft_strchr(line, '#') &&
 				ft_strchr(line, ' '))
 			comp++;
+		line = NULL;
 	}
-	head->max = comp;
+	(head ? head->max = comp : no());
+	(line ? free(line) : 0);
 	return (head);
 }
 

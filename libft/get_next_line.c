@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/11 14:08:47 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/21 08:41:32 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/22 18:22:14 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 
 static	int		join(char **line)
 {
-	int		i;
 	int		size;
 	char	*temp;
 	char	buf[2];
 
-	i = 0;
 	temp = NULL;
 	buf[0] = '\0';
 	buf[1] = '\0';

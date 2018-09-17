@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 11:18:12 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/29 16:36:24 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/09/05 16:55:57 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		maze_runner(t_map *map, t_move *pre_node)
 	hold = last_node(pre_node);
 	num_moves = -1;
 	(map->end ? hold->exit = 1 : 0);
-	while (!map->end && map->tree[++i])
+	while (!map->end && map->tree[++i] && !hold->exit)
 		if (repeat(map->tree[i], pre_node, hold))
 		{
 			hold->next = make_t_move(pre_node->home, map->tree[i], i, -1);
@@ -74,6 +74,8 @@ void	find_end(t_map *map)
 	int i;
 
 	i = 0;
+	while (map && !map->start)
+		map = map->next;
 	if (map && map->end)
 	{
 		map->moves = NULL;
@@ -93,6 +95,4 @@ void	find_end(t_map *map)
 		if (!map->moves[i]->exit)
 			map->moves[i]->num_move = -1;
 	}
-	if (map->next)
-		find_end(map->next);
 }

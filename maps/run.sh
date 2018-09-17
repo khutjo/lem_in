@@ -1,0 +1,128 @@
+ ./lem-in < 42
+read -p "42\n"
+ ./lem-in < Chloe
+read -p "Chloe\n"
+ ./lem-in < bad_rooms
+read -p "bad_rooms\n"
+ ./lem-in < big
+read -p "big\n"
+# ./lem-in < bmap
+#read -p "bmap\n"
+ ./lem-in < cobmap
+read -p "cobmap\n"
+ ./lem-in < comments
+read -p "commets\n"
+ ./lem-in < comments2
+read -p "comments2\n"
+ ./lem-in < diamond
+read -p "diamond\n"
+ ./lem-in < directlink2end
+read -p "directlink2end\n"
+ ./lem-in < duplicatepipe1
+read -p "duplicatepipe1\n"
+ ./lem-in < empty
+read -p "empty\n"
+ ./lem-in < europe
+read -p "europe\n"
+ ./lem-in < europe_utf
+read -p "europe_utf\n"
+ ./lem-in < haaaaaaaaaaaaaaaaaaaardtest
+read -p "haaaaaaaaaaaaaaaaaaaardtest\n"
+ ./lem-in < hardmap
+read -p "hardmap\n"
+ ./lem-in < illegalname
+read -p "illegalname\n"
+ ./lem-in < illegalname1
+read -p "illegalname1\n"
+ ./lem-in < in0
+read -p "in0\n"
+ ./lem-in < input0
+read -p "input0\n"
+ ./lem-in < input1
+read -p "input1\n"
+ ./lem-in < input2
+read -p "input2\n"
+ ./lem-in < input3
+read -p "input3\n"
+ ./lem-in < input4
+read -p "input4"
+ ./lem-in < invalidcommand
+read -p "invalidcommend\n"
+ ./lem-in < invalidcommand1
+read -p "invalidcommend1\n"
+ ./lem-in < loop
+read -p "loop\n"
+ ./lem-in < loop1
+read -p "loop1\n"
+ ./lem-in < map10
+read -p "map10\n"
+ ./lem-in < map14
+read -p "map14\n"
+ ./lem-in < map3
+read -p "map3\n"
+ ./lem-in < map4
+read -p "map4\n"
+ ./lem-in < map42
+read -p "map42\n"
+ ./lem-in < map5
+read -p "map5\n"
+ ./lem-in < maptest
+read -p "maptest\n"
+ ./lem-in < mmkr2
+read -p "mmkr2\n"
+ ./lem-in < multiends
+read -p "multiends\n"	
+ ./lem-in < multiplewaysmap
+read -p "multiplewaysmap\n"
+ ./lem-in < no_ants
+read -p "no_ants\n"
+ ./lem-in < no_rooms
+read -p "no_rooms\n"
+ ./lem-in < no_tubes
+read -p "no_tubes\n"
+ ./lem-in < noants
+read -p "noants\n"
+ ./lem-in < noend
+read -p "noend\n"
+ ./lem-in < nopath
+read -p "nopath\n"
+ ./lem-in < nostart
+read -p "nostart\n"
+ ./lem-in < overflow
+read -p "overflow\n"
+ ./lem-in < pentagram
+read -p "pentagram\n"
+ ./lem-in < roundmap
+read -p "roundmap\n"
+ ./lem-in < shortest
+read -p "shortest\n"
+ ./lem-in < simple
+read -p "simple\n"
+ ./lem-in < simple1
+read -p "simple1\n"
+ ./lem-in < simple2
+read -p "simple2\n"
+ ./lem-in < space_room
+read -p "space_room\n"
+ ./lem-in < space_room_2
+read -p "space_room_2\n"
+ ./lem-in < startisend
+read -p "startisend\n"
+ ./lem-in < test
+read -p "test\n"
+ ./lem-in < test1
+read -p "test1\n"
+ ./lem-in < test2commentary
+read -p "test2commentary\n"
+ ./lem-in < testbug
+read -p "testbug\n"
+ ./lem-in < toile
+read -p "toile\n"
+ ./lem-in < toile2
+read -p "toile2\n"
+ ./lem-in < triforce
+read -p "triforce\n"
+ ./lem-in < underflow
+read -p "underflow\n"
+ ./lem-in < whitespaces
+ echo "whitespacies\n"

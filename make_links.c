@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/22 17:55:49 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/29 16:37:56 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/09/07 16:01:25 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,23 @@ static	t_map	*put_link(t_map *head, t_map *run, char *link)
 	stop = 0;
 	while (link[stop] && link[stop] != '-')
 		stop++;
-	if (ft_strstr(&link[stop], head->name))
+	if (ft_strequ(&link[1 + stop], head->name))
 	{
-		while (!ft_strnstr(link, run->name, stop) && head)
-		{
+		while (run && !ft_strnequ(link, run->name, stop) && head)
 			run = run->next;
-		}
 	}
 	else
-		while (!ft_strstr(&link[stop], run->name) && run)
+		while (run && !ft_strequ(&link[1 + stop], run->name) && run)
 			run = run->next;
+	if (!run)
+		no();
 	return (run);
 }
 
 static	void	find_link(t_map *head, t_map *set_link, t_ant *lines)
 {
 	int		i;
+	int		dash;
 	int		links_num;
 
 	i = 0;
@@ -59,6 +60,9 @@ static	void	find_link(t_map *head, t_map *set_link, t_ant *lines)
 		lines = lines->next;
 	while (lines)
 	{
+		dash = 0;
+		while (lines->line[dash] && lines->line[dash] != '-')
+			dash++;
 		if (ft_strstr(lines->line, set_link->name))
 			set_link->tree[i++] = put_link(set_link, head, lines->line);
 		lines = lines->next;
@@ -67,8 +71,17 @@ static	void	find_link(t_map *head, t_map *set_link, t_ant *lines)
 
 void			map(t_map *head, t_ant *lines)
 {
-	t_map *list_runner;
+	t_map	*list_runner;
+	t_ant	*line;
+	int		i;
 
+	i = 0;
+	line = lines;
+	while (line && !ft_strchr(line->line, '-'))
+		line = line->next;
+	while (line && (ft_strchr(line->line, '-') || line->line[0] == '#'))
+		line = line->next;
+	(line ? no() : 0);
 	list_runner = head;
 	while (list_runner)
 	{
@@ -77,17 +90,19 @@ void			map(t_map *head, t_ant *lines)
 	}
 }
 
-void			lay_ant_eggs(t_map *head, t_ants **queen_ant)
+void			lay_ant_eggs(t_ant *lines, t_ants **queen_ant)
 {
 	int		i;
+	int		num;
 	t_ants	*run;
 	t_ants	*temp;
 
 	i = -1;
 	(*queen_ant) = NULL;
-	while (head && !head->start)
-		head = head->next;
-	while (++i < head->ants)
+	while (lines && lines->line[0] == '#')
+		lines = lines->next;
+	num = ft_atoi(lines->line);
+	while (++i < num)
 	{
 		temp = (t_ants *)malloc(sizeof(t_ants));
 		if (!(*queen_ant))
@@ -96,6 +111,5 @@ void			lay_ant_eggs(t_map *head, t_ants **queen_ant)
 			run->next = temp;
 		run = temp;
 		temp->name = 1 + i;
-		temp->home = head;
 	}
 }
